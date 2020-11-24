@@ -14,7 +14,7 @@ process readExtraction{
 
     script:
         """
-            cd nanoid
+            cd /workspace/ieo4032/nanoid
             Rscript read.extraction.R
         """
 }
