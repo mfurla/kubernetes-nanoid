@@ -23,7 +23,7 @@ if(params.readExtraction){
 }
 
 /*
-    Reads extraction
+    Reads extraction - rewrite better with proper Naxtflow functionalities
 */
 if(params.minimap2){
     process minimap2 {
@@ -34,7 +34,12 @@ if(params.minimap2){
     script:
     """
         cp -r ${params.FASTQ} ${params.FASTQ}_DATA
-        for i in ${params.FASTQ}_DNA/*fastq; do
+        
+        ls -ltrh ${params.FASTQ}_DATA
+        head ${params.FASTQ}_DATA/fastq_runid_3651d22a6c40d30c92a1f3ba60bd39160c744572_0_0.U2T.fastq
+
+        for i in ${params.FASTQ}_DNA/*fastq
+        do
             awk '{ if (NR%4 == 2) {gsub(/U/,"T",$1); print $1} else print }' $i > ${i%.fastq}.U2T.fastq;
             rm $i
         done
