@@ -27,7 +27,6 @@ if(params.readExtraction){
 */
 if(params.minimap2){
     process minimap2 {
-      publishDir "/workspace/ieo4032/nanoid/data", mode: 'copy'
       input:
       output:
     
