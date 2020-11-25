@@ -165,6 +165,36 @@
     }
 
 /*
+    Mismatch Read Identification
+*/
+
+    process mismatchReadIdentification{
+      publishDir ".", mode: 'copy'
+
+      input:
+      val minimap2Flag from minimap2Flag
+      val readExtractionFlag from readExtractionFlag
+      val alignmentExtractionFlag from alignmentExtractionFlag
+      val sequencingSummaryFlag from sequencingSummaryFlag
+      val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from from alignmentReconstructionFlag
+
+      output:
+      val "mismatchReadIdentification" into mismatchReadIdentificationFlag
+    
+    script:
+    if(params.mismatchReadIdentification='true')
+    """
+        cd /workspace/ieo4032/nanoid
+        Rscript mismatch.read.identification.R
+    """  
+    else
+    """
+        echo "Skipped"
+    """
+    }
+
+/*
     Trace Model
 */
 
@@ -177,6 +207,7 @@
       val alignmentExtractionFlag from alignmentExtractionFlag
       val sequencingSummaryFlag from sequencingSummaryFlag
       val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from from alignmentReconstructionFlag
       val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
 
       output:
@@ -207,6 +238,7 @@
       val alignmentExtractionFlag from alignmentExtractionFlag
       val sequencingSummaryFlag from sequencingSummaryFlag
       val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from from alignmentReconstructionFlag
       val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
       val traceModelFlag from traceModelFlag
 
@@ -238,6 +270,7 @@
       val alignmentExtractionFlag from alignmentExtractionFlag
       val sequencingSummaryFlag from sequencingSummaryFlag
       val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from from alignmentReconstructionFlag
       val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
       val traceModelFlag from traceModelFlag
       val traceModelAddOnFlag from traceModelAddOnFlag
@@ -270,6 +303,7 @@
       val alignmentExtractionFlag from alignmentExtractionFlag
       val sequencingSummaryFlag from sequencingSummaryFlag
       val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from from alignmentReconstructionFlag
       val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
       val traceModelFlag from traceModelFlag
       val traceModelAddOnFlag from traceModelAddOnFlag
@@ -303,6 +337,7 @@
       val alignmentExtractionFlag from alignmentExtractionFlag
       val sequencingSummaryFlag from sequencingSummaryFlag
       val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from from alignmentReconstructionFlag
       val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
       val traceModelFlag from traceModelFlag
       val traceModelAddOnFlag from traceModelAddOnFlag
@@ -337,6 +372,7 @@
       val alignmentExtractionFlag from alignmentExtractionFlag
       val sequencingSummaryFlag from sequencingSummaryFlag
       val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from from alignmentReconstructionFlag
       val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
       val traceModelFlag from traceModelFlag
       val traceModelAddOnFlag from traceModelAddOnFlag
