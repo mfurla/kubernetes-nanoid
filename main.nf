@@ -11,7 +11,9 @@
       publishDir ".", mode: 'copy'
 
       input:
-      output: val "minimap2" into minimap2Flag
+
+      output:
+      val "minimap2" into minimap2Flag
     
     script:
     if(${paramsparams.minimap2}='true')
@@ -36,7 +38,9 @@
       publishDir ".", mode: 'copy'
     
       input:
-      output: val "readExtraction" into readExtractionFlag
+
+      output:
+      val "readExtraction" into readExtractionFlag
     
     script:
     if(${paramsparams.readExtraction}='true')
@@ -59,7 +63,9 @@
       publishDir ".", mode: 'copy'
 
       input:
-      output: val "alignmentExtraction" into alignmentExtractionFlag
+
+      output:
+      val "alignmentExtraction" into alignmentExtractionFlag
     
     script:
     if(${paramsparams.alignmentExtraction}='true')
@@ -82,7 +88,9 @@
       publishDir ".", mode: 'copy'
 
       input:
-      output: val "sequencingSummary" into sequencingSummaryFlag
+
+      output:
+      val "sequencingSummary" into sequencingSummaryFlag
     
     script:
     if(${paramsparams.sequencingSummary}='true')
@@ -105,7 +113,9 @@
       publishDir ".", mode: 'copy'
 
       input:
-      output: val "alignmentReconstruction" into alignmentReconstructionFlag
+
+      output:
+      val "alignmentReconstruction" into alignmentReconstructionFlag
     
     script:
     if(${paramsparams.alignmentReconstruction}='true')
@@ -128,7 +138,9 @@
       publishDir ".", mode: 'copy'
 
       input:
-      output: val "fivemerAlignmentReconstruction" into fivemerAlignmentReconstructionFlag
+
+      output:
+      val "fivemerAlignmentReconstruction" into fivemerAlignmentReconstructionFlag
     
     script:
     if(${paramsparams.fivemerAlignmentReconstruction}='true')
@@ -151,7 +163,9 @@
       publishDir ".", mode: 'copy'
 
       input:
-      output: val "traceModel" into traceModelFlag
+
+      output:
+      val "traceModel" into traceModelFlag
     
     script:
     if(${paramsparams.traceModel}='true')
@@ -174,7 +188,9 @@
       publishDir ".", mode: 'copy'
 
       input:
-      output: val "traceModelAddOn" into traceModelAddOnFlag
+
+      output:
+      val "traceModelAddOn" into traceModelAddOnFlag
     
     script:
     if(${paramsparams.traceModelAddOn}='true')
@@ -197,7 +213,9 @@
       publishDir ".", mode: 'copy'
 
       input:
-      output: val "rawSignal" into rawSignalFlag
+
+      output:
+      val "rawSignal" into rawSignalFlag
     
     script:
     if(${paramsparams.rawSignal}='true')
@@ -220,7 +238,9 @@
       publishDir ".", mode: 'copy'
 
       input:
-      output: val "rawSignalFiveMers" into rawSignalFiveMersFlag
+
+      output:
+      val "rawSignalFiveMers" into rawSignalFiveMersFlag
     
     script:
     if(${paramsparams.rawSignalFiveMers}='true')
@@ -243,7 +263,9 @@
       publishDir ".", mode: 'copy'
 
       input:
-      output: val "rawSignalFiveMersAddOn" into rawSignalFiveMersAddOnFlag
+
+      output:
+      val "rawSignalFiveMersAddOn" into rawSignalFiveMersAddOnFlag
     
     script:
     if(${paramsparams.rawSignalFiveMersAddOn}='true')
@@ -266,19 +288,20 @@
       publishDir ".", mode: 'copy'
 
       input:
-        val minimap2Flag from minimap2Flag
-        val readExtractionFlag from readExtractionFlag
-        val alignmentExtractionFlag from alignmentExtractionFlag
-        val sequencingSummaryFlag from sequencingSummaryFlag
-        val alignmentReconstructionFlag from alignmentReconstructionFlag
-        val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
-        val traceModelFlag from traceModelFlag
-        val traceModelAddOnFlag from traceModelAddOnFlag
-        val rawSignalFlag from rawSignalFlag
-        val rawSignalFiveMersFlag from rawSignalFiveMersFlag
-        val rawSignalFiveMersAddOnFlag from rawSignalFiveMersAddOnFlag
+      val minimap2Flag from minimap2Flag
+      val readExtractionFlag from readExtractionFlag
+      val alignmentExtractionFlag from alignmentExtractionFlag
+      val sequencingSummaryFlag from sequencingSummaryFlag
+      val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
+      val traceModelFlag from traceModelFlag
+      val traceModelAddOnFlag from traceModelAddOnFlag
+      val rawSignalFlag from rawSignalFlag
+      val rawSignalFiveMersFlag from rawSignalFiveMersFlag
+      val rawSignalFiveMersAddOnFlag from rawSignalFiveMersAddOnFlag
         
-      output: val "dataFormatting" into dataFormattingFlag
+      output:
+      val "dataFormatting" into dataFormattingFlag
     
     script:
     if(${paramsparams.dataFormatting}='true')
