@@ -16,7 +16,7 @@
       val "minimap2" into minimap2Flag
     
     script:
-    if(params.minimap2='true')
+    if(params.minimap2=='true')
     """
         cd /workspace/ieo4032/nanoid
         minimap2 -ax splice -k14 --secondary=no -I1G -t${task.cpus} Mus_musculus.GRCm38.dna.primary_assembly.fa ${params.FASTQ}_DNA/*.fastq > data/minimap.sam
@@ -43,7 +43,7 @@
       val "readExtraction" into readExtractionFlag
     
     script:
-    if(params.readExtraction='true')
+    if(params.readExtraction=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript read.extraction.R
@@ -69,7 +69,7 @@
       val "alignmentExtraction" into alignmentExtractionFlag
     
     script:
-    if(params.alignmentExtraction='true')
+    if(params.alignmentExtraction=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript alignment.extraction.R
@@ -96,7 +96,7 @@
       val "sequencingSummary" into sequencingSummaryFlag
     
     script:
-    if(params.sequencingSummary='true')
+    if(params.sequencingSummary=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript sequencing.summary.R
@@ -124,7 +124,7 @@
       val "alignmentReconstruction" into alignmentReconstructionFlag
     
     script:
-    if(params.alignmentReconstruction='true')
+    if(params.alignmentReconstruction=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript alignment.reconstruction.R
@@ -153,7 +153,7 @@
       val "fivemerAlignmentReconstruction" into fivemerAlignmentReconstructionFlag
     
     script:
-    if(params.fivemerAlignmentReconstruction='true')
+    if(params.fivemerAlignmentReconstruction=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript five.mer.alignment.reconstruction.R
@@ -183,7 +183,7 @@
       val "mismatchReadIdentification" into mismatchReadIdentificationFlag
     
     script:
-    if(params.mismatchReadIdentification='true')
+    if(params.mismatchReadIdentification=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript mismatch.read.identification.R
@@ -214,7 +214,7 @@
       val "traceModel" into traceModelFlag
     
     script:
-    if(params.traceModel='true')
+    if(params.traceModel=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript trace.model.R
@@ -246,7 +246,7 @@
       val "traceModelAddOn" into traceModelAddOnFlag
     
     script:
-    if(params.traceModelAddOn='true')
+    if(params.traceModelAddOn=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript trace.model.add.on.R
@@ -279,7 +279,7 @@
       val "rawSignal" into rawSignalFlag
     
     script:
-    if(params.rawSignal='true')
+    if(params.rawSignal=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript raw.signal.R
@@ -313,7 +313,7 @@
       val "rawSignalFiveMers" into rawSignalFiveMersFlag
     
     script:
-    if(params.rawSignalFiveMers='true')
+    if(params.rawSignalFiveMers=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript raw.signal.five.mers.R
@@ -348,7 +348,7 @@
       val "rawSignalFiveMersAddOn" into rawSignalFiveMersAddOnFlag
     
     script:
-    if(params.rawSignalFiveMersAddOn='true')
+    if(params.rawSignalFiveMersAddOn=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript raw.signal.five.mers.add.on.R
@@ -384,7 +384,7 @@
       val "dataFormatting" into dataFormattingFlag
     
     script:
-    if(params.dataFormatting='true')
+    if(params.dataFormatting=='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript data.formatting.R
