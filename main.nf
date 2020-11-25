@@ -9,14 +9,14 @@
 
     process minimap2 {
       publishDir ".", mode: 'copy'
-
+    
       input:
 
       output:
       val "minimap2" into minimap2Flag
     
     script:
-    if(${paramsparams.minimap2}='true')
+    if(params.minimap2='true')
     """
         cd /workspace/ieo4032/nanoid
         minimap2 -ax splice -k14 --secondary=no -I1G -t${task.cpus} Mus_musculus.GRCm38.dna.primary_assembly.fa ${params.FASTQ}_DNA/*.fastq > data/minimap.sam
@@ -28,7 +28,6 @@
         echo "Skipped"
     """
     }
-}
 
 /*
     Reads extraction
@@ -38,12 +37,13 @@
       publishDir ".", mode: 'copy'
     
       input:
+      val minimap2Flag from minimap2Flag
 
       output:
       val "readExtraction" into readExtractionFlag
     
     script:
-    if(${paramsparams.readExtraction}='true')
+    if(params.readExtraction='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript read.extraction.R
@@ -53,7 +53,6 @@
         echo "Skipped"
     """
     }
-}
 
 /*
     Alignment extraction
@@ -63,12 +62,14 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val minimap2Flag from minimap2Flag
+      val readExtractionFlag from readExtractionFlag
 
       output:
       val "alignmentExtraction" into alignmentExtractionFlag
     
     script:
-    if(${paramsparams.alignmentExtraction}='true')
+    if(params.alignmentExtraction='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript alignment.extraction.R
@@ -78,7 +79,6 @@
         echo "Skipped"
     """
     }
-}
 
 /*
     Sequencing summary
@@ -88,12 +88,15 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val minimap2Flag from minimap2Flag
+      val readExtractionFlag from readExtractionFlag
+      val alignmentExtractionFlag from alignmentExtractionFlag
 
       output:
       val "sequencingSummary" into sequencingSummaryFlag
     
     script:
-    if(${paramsparams.sequencingSummary}='true')
+    if(params.sequencingSummary='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript sequencing.summary.R
@@ -103,7 +106,6 @@
         echo "Skipped"
     """
     }
-}
 
 /*
     Alignment Reconstruction
@@ -113,12 +115,16 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val minimap2Flag from minimap2Flag
+      val readExtractionFlag from readExtractionFlag
+      val alignmentExtractionFlag from alignmentExtractionFlag
+      val sequencingSummaryFlag from sequencingSummaryFlag
 
       output:
       val "alignmentReconstruction" into alignmentReconstructionFlag
     
     script:
-    if(${paramsparams.alignmentReconstruction}='true')
+    if(params.alignmentReconstruction='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript alignment.reconstruction.R
@@ -128,7 +134,6 @@
         echo "Skipped"
     """
     }
-}
 
 /*
     5-mer Alignment Reconstruction
@@ -138,12 +143,17 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val minimap2Flag from minimap2Flag
+      val readExtractionFlag from readExtractionFlag
+      val alignmentExtractionFlag from alignmentExtractionFlag
+      val sequencingSummaryFlag from sequencingSummaryFlag
+      val alignmentReconstructionFlag from alignmentReconstructionFlag
 
       output:
       val "fivemerAlignmentReconstruction" into fivemerAlignmentReconstructionFlag
     
     script:
-    if(${paramsparams.fivemerAlignmentReconstruction}='true')
+    if(params.fivemerAlignmentReconstruction='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript five.mer.alignment.reconstruction.R
@@ -153,7 +163,6 @@
         echo "Skipped"
     """
     }
-}
 
 /*
     Trace Model
@@ -163,12 +172,18 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val minimap2Flag from minimap2Flag
+      val readExtractionFlag from readExtractionFlag
+      val alignmentExtractionFlag from alignmentExtractionFlag
+      val sequencingSummaryFlag from sequencingSummaryFlag
+      val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
 
       output:
       val "traceModel" into traceModelFlag
     
     script:
-    if(${paramsparams.traceModel}='true')
+    if(params.traceModel='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript trace.model.R
@@ -178,7 +193,6 @@
         echo "Skipped"
     """
     }
-}
 
 /*
     Trace Model Add On
@@ -188,12 +202,19 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val minimap2Flag from minimap2Flag
+      val readExtractionFlag from readExtractionFlag
+      val alignmentExtractionFlag from alignmentExtractionFlag
+      val sequencingSummaryFlag from sequencingSummaryFlag
+      val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
+      val traceModelFlag from traceModelFlag
 
       output:
       val "traceModelAddOn" into traceModelAddOnFlag
     
     script:
-    if(${paramsparams.traceModelAddOn}='true')
+    if(params.traceModelAddOn='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript trace.model.add.on.R
@@ -203,7 +224,6 @@
         echo "Skipped"
     """
     }
-}
 
 /*
     Raw Signal
@@ -213,12 +233,20 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val minimap2Flag from minimap2Flag
+      val readExtractionFlag from readExtractionFlag
+      val alignmentExtractionFlag from alignmentExtractionFlag
+      val sequencingSummaryFlag from sequencingSummaryFlag
+      val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
+      val traceModelFlag from traceModelFlag
+      val traceModelAddOnFlag from traceModelAddOnFlag
 
       output:
       val "rawSignal" into rawSignalFlag
     
     script:
-    if(${paramsparams.rawSignal}='true')
+    if(params.rawSignal='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript raw.signal.R
@@ -228,7 +256,6 @@
         echo "Skipped"
     """
     }
-}
 
 /*
     Raw Signal 5-mers
@@ -238,12 +265,21 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val minimap2Flag from minimap2Flag
+      val readExtractionFlag from readExtractionFlag
+      val alignmentExtractionFlag from alignmentExtractionFlag
+      val sequencingSummaryFlag from sequencingSummaryFlag
+      val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
+      val traceModelFlag from traceModelFlag
+      val traceModelAddOnFlag from traceModelAddOnFlag
+      val rawSignalFlag from rawSignalFlag
 
       output:
       val "rawSignalFiveMers" into rawSignalFiveMersFlag
     
     script:
-    if(${paramsparams.rawSignalFiveMers}='true')
+    if(params.rawSignalFiveMers='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript raw.signal.five.mers.R
@@ -253,7 +289,6 @@
         echo "Skipped"
     """
     }
-}
 
 /*
     Raw Signal 5-mers Add On
@@ -263,12 +298,22 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val minimap2Flag from minimap2Flag
+      val readExtractionFlag from readExtractionFlag
+      val alignmentExtractionFlag from alignmentExtractionFlag
+      val sequencingSummaryFlag from sequencingSummaryFlag
+      val alignmentReconstructionFlag from alignmentReconstructionFlag
+      val fivemerAlignmentReconstructionFlag from fivemerAlignmentReconstructionFlag
+      val traceModelFlag from traceModelFlag
+      val traceModelAddOnFlag from traceModelAddOnFlag
+      val rawSignalFlag from rawSignalFlag
+      val rawSignalFiveMersFlag from rawSignalFiveMersFlag
 
       output:
       val "rawSignalFiveMersAddOn" into rawSignalFiveMersAddOnFlag
     
     script:
-    if(${paramsparams.rawSignalFiveMersAddOn}='true')
+    if(params.rawSignalFiveMersAddOn='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript raw.signal.five.mers.add.on.R
@@ -278,7 +323,6 @@
         echo "Skipped"
     """
     }
-}
 
 /*
     Raw Signal 5-mers Add On
@@ -304,7 +348,7 @@
       val "dataFormatting" into dataFormattingFlag
     
     script:
-    if(${paramsparams.dataFormatting}='true')
+    if(params.dataFormatting='true')
     """
         cd /workspace/ieo4032/nanoid
         Rscript data.formatting.R
@@ -314,4 +358,3 @@
         echo "Skipped"
     """
     }
-}
