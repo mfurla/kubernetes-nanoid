@@ -4,6 +4,30 @@
 */
 
 /*
+    FASTQ extraction
+*/
+
+    process fastqExtraction{
+      publishDir ".", mode: 'copy'
+    
+      input:
+
+      output:
+      val "fastqExtraction" into fastqExtractionFlag
+    
+    script:
+    if(params.fastqExtraction=='true')
+    """
+        cd /workspace/ieo4032/nanoid
+        Rscript fastq.extraction.R
+    """
+    else
+    """
+        echo "Skipped"
+    """
+    }
+
+/*
     Minimap2 - rewrite better with proper Naxtflow functionalities
 */
 
@@ -11,6 +35,7 @@
       publishDir ".", mode: 'copy'
     
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
 
       output:
       val "minimap2" into minimap2Flag
@@ -37,6 +62,7 @@
       publishDir ".", mode: 'copy'
     
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
 
       output:
@@ -62,6 +88,7 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
       val readExtractionFlag from readExtractionFlag
 
@@ -88,6 +115,7 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
       val readExtractionFlag from readExtractionFlag
       val alignmentExtractionFlag from alignmentExtractionFlag
@@ -115,6 +143,7 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
       val readExtractionFlag from readExtractionFlag
       val alignmentExtractionFlag from alignmentExtractionFlag
@@ -143,6 +172,7 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
       val readExtractionFlag from readExtractionFlag
       val alignmentExtractionFlag from alignmentExtractionFlag
@@ -172,6 +202,7 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
       val readExtractionFlag from readExtractionFlag
       val alignmentExtractionFlag from alignmentExtractionFlag
@@ -202,6 +233,7 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
       val readExtractionFlag from readExtractionFlag
       val alignmentExtractionFlag from alignmentExtractionFlag
@@ -233,6 +265,7 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
       val readExtractionFlag from readExtractionFlag
       val alignmentExtractionFlag from alignmentExtractionFlag
@@ -265,6 +298,7 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
       val readExtractionFlag from readExtractionFlag
       val alignmentExtractionFlag from alignmentExtractionFlag
@@ -298,6 +332,7 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
       val readExtractionFlag from readExtractionFlag
       val alignmentExtractionFlag from alignmentExtractionFlag
@@ -332,6 +367,7 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
       val readExtractionFlag from readExtractionFlag
       val alignmentExtractionFlag from alignmentExtractionFlag
@@ -367,6 +403,7 @@
       publishDir ".", mode: 'copy'
 
       input:
+      val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
       val readExtractionFlag from readExtractionFlag
       val alignmentExtractionFlag from alignmentExtractionFlag
