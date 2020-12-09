@@ -5,7 +5,9 @@
 # system("sudo apt-get -y install liblzma-dev")
 
 ## CPUs
-mc.cores = 5
+if(!("future" %in% rownames(installed.packages())))install.packages("future")
+library(future)
+mc.cores = availableCores()
 
 ## Data directories
 # FAST5paths <- paste0("/workspace/ieo4032/guppy_5EU_",c("0h_25c","24h_64c","24h_28a","1h_c64","1h_f80_A","1h_f80_B"),"/FAST5")
@@ -67,8 +69,8 @@ library(reticulate)
 library(tensorflow)
 library(keras)
 
-install.packages("largeList")
-library("largeList")
+if(!("largeList" %in% rownames(installed.packages())))install.packages("largeList")
+library(largeList)
 
 sessionInfo()
 
