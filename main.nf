@@ -55,32 +55,6 @@
     }
 
 /*
-    Reads extraction
-*/
-
-    process readExtraction{
-      publishDir ".", mode: 'copy'
-    
-      input:
-      val fastqExtractionFlag from fastqExtractionFlag
-      val minimap2Flag from minimap2Flag
-
-      output:
-      val "readExtraction" into readExtractionFlag
-    
-    script:
-    if(params.readExtraction=='true')
-    """
-        cd /workspace/ieo4032/nanoid
-        Rscript read.extraction.R
-    """
-    else
-    """
-        echo "Skipped"
-    """
-    }
-
-/*
     Alignment extraction
 */
 
@@ -90,7 +64,6 @@
       input:
       val fastqExtractionFlag from fastqExtractionFlag
       val minimap2Flag from minimap2Flag
-      val readExtractionFlag from readExtractionFlag
 
       output:
       val "alignmentExtraction" into alignmentExtractionFlag
@@ -101,6 +74,33 @@
         cd /workspace/ieo4032/nanoid
         Rscript alignment.extraction.R
     """  
+    else
+    """
+        echo "Skipped"
+    """
+    }
+
+/*
+    Reads extraction
+*/
+
+    process readExtraction{
+      publishDir ".", mode: 'copy'
+    
+      input:
+      val fastqExtractionFlag from fastqExtractionFlag
+      val minimap2Flag from minimap2Flag
+      val alignmentExtractionFlag from alignmentExtractionFlag
+
+      output:
+      val "readExtraction" into readExtractionFlag
+    
+    script:
+    if(params.readExtraction=='true')
+    """
+        cd /workspace/ieo4032/nanoid
+        Rscript read.extraction.R
+    """
     else
     """
         echo "Skipped"
