@@ -45,7 +45,7 @@
     """
         cd /workspace/ieo4032/nanoid
         minimap2 -ax splice -k14 --secondary=no -I1G -t${task.cpus} Mus_musculus.GRCm38.dna.primary_assembly.fa ${params.FASTQ}_DNA/*.fastq > data/minimap.sam
-        samtools view data/minimap.sam -bhq20 -t Mus_musculus.GRCm38.dna.primary_assembly.fa.fai -F 2324 | samtools sort -o data/minimap.bam
+        samtools view data/minimap.sam -bhq20 -t Mus_musculus.GRCm38.dna.primary_assembly.fa.fai -F 2308 | samtools sort -o data/minimap.bam
         samtools index data/minimap.bam data/minimap.bam.bai        
     """
     else
