@@ -12,9 +12,9 @@ build.trace.add.on.list = function(read.name){
   try({
     fast5.file = read.to.fast5.name[read.name]
     read.sequence = rev(strsplit(read.sequence.list[[read.name]],split = "")[[1]])
-    trace = h5read(fast5.file,paste0("read_",read.name,"/Analyses/Basecall_1D_001/BaseCalled_template/Trace"))
+    trace = h5read(fast5.file,paste0("read_",read.name,"/Analyses/",slotName,"/BaseCalled_template/Trace"))
     rownames(trace) = c("flip_A","flip_C","flip_G","flip_T","flop_A","flop_C","flop_G","flop_T")
-    move = h5read(fast5.file,paste0("read_",read.name,"/Analyses/Basecall_1D_001/BaseCalled_template/Move"))
+    move = h5read(fast5.file,paste0("read_",read.name,"/Analyses/",slotName,"/BaseCalled_template/Move"))
     move.rle = Rle(move)
     event.repeats = move[move == 1]
     event.repeats[cumsum(runLength(move.rle)[runValue(move.rle) == 1])] = runLength(move.rle)[runValue(move.rle) == 0] + 1

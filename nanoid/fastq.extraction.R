@@ -35,7 +35,7 @@ foreach(fast5.file=fast5.files) %dopar% {
 			
 	for(fast5read in fast5reads)
 	{
-		cat(rna.to.dna(h5read(fast5.file,paste0(fast5read,"/Analyses/Basecall_1D_001/BaseCalled_template/Fastq")),suffix = ""))
+		cat(rna.to.dna(h5read(fast5.file,paste0(fast5read,"/Analyses/",slotName,"/BaseCalled_template/Fastq")),suffix = ""))
 	}
 	sink()
 }

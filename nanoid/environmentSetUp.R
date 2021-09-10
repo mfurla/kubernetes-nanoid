@@ -13,6 +13,10 @@ mc.cores = round(as.numeric(readLines("/sys/fs/cgroup/cpu/cpu.shares"))/1024) #a
 # FAST5paths <- paste0("/workspace/ieo4032/guppy_5EU_",c("0h_25c","24h_64c","24h_28a","1h_c64","1h_f80_A","1h_f80_B"),"/FAST5")
 FAST5paths <- "/workspace/ieo4032/guppy_5EU_1h_f80_D/FAST5"
 
+## FAST5 slot name - To be defined properly for each dataset
+slotName = "Basecall_1D_001"
+# slotName = "Basecall_1D_000"
+
 ## Package to install specific versions
 if(!("versions" %in% rownames(installed.packages())))install.packages("versions")
 library("versions")

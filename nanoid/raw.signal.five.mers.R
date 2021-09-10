@@ -19,7 +19,7 @@ build.raw.signal.five.mers.list = function(read.name){
     raw.signal = h5read(fast5.file,paste0("read_",read.name,"/Raw/Signal"))
 
     # if (is.na(read.number)){move = h5read(file.path(prewd,fast5.file),paste0("read_",strsplit(read.name,split = "\\.")[[1]][1],"/Analyses/Basecall_1D_000/BaseCalled_template/Move"))} else {move = h5read(file.path(prewd,fast5.file),"/Analyses/Basecall_1D_000/BaseCalled_template/Move")}
-    move = h5read(fast5.file,paste0("read_",read.name,"/Analyses/Basecall_1D_001/BaseCalled_template/Move"))
+    move = h5read(fast5.file,paste0("read_",read.name,"/Analyses/",slotName,"/BaseCalled_template/Move"))
     move.rle = Rle(move)
 
     read.sequence = rev(strsplit(read.sequence.list[[read.name]],split = "")[[1]])

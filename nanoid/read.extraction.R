@@ -30,7 +30,7 @@ for(fast5.file in fast5.files){
 	## instead of a for we use a mclapply to parallelize
 	tmp <- unlist(mclapply(fast5reads, function(fast5read)
 	{
-		h5 <- h5read(fast5.file,paste0(fast5read,"/Analyses/Basecall_1D_001/BaseCalled_template/Fastq"))
+		h5 <- h5read(fast5.file,paste0(fast5read,"/Analyses/",slotName,"/BaseCalled_template/Fastq"))
 
 		fast5read <- strsplit(fast5read,"_")[[1]][[2]]
 
