@@ -5,7 +5,7 @@ source("environmentSetUp.R")
 load(file.path("data","fast5.files.RData"))
 
 ### extract aligned sequences ###
-reference.genome = readDNAStringSet(filepath = "Mus_musculus.GRCm38.dna.primary_assembly.fa")
+reference.genome = readDNAStringSet(filepath = genomeFasta)
 ## MF: I don't know why but the chromosomes names in the reference genome are strange...
 names(reference.genome) <- sapply(strsplit(names(reference.genome)," "),"[[",1)
 

@@ -17,6 +17,10 @@ FAST5paths <- "/workspace/ieo4032/guppy_5EU_1h_f80_D/FAST5"
 slotName = "Basecall_1D_001"
 # slotName = "Basecall_1D_000"
 
+## Genome fasta
+genomeFasta = "Mus_musculus.GRCm38.dna.primary_assembly.fa"
+# genomeFasta = "Homo_sapiens.GRCh38.dna.primary_assembly.fa"
+
 ## Package to install specific versions
 if(!("versions" %in% rownames(installed.packages())))install.packages("versions")
 library("versions")
